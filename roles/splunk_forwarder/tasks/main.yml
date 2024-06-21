@@ -1,0 +1,19 @@
+---
+- include_tasks: detect_os.yml
+
+- name: Ensure the appropriate state of Splunk Forwarder
+  block:
+    - include_tasks: check_splunk_version.yml
+
+    - include_tasks: install_splunk.yml
+      when: splunk_forwarder_state == "present" and splunk_version_mismatch is defined and splunk_version_mismatch == false
+
+    - include_tasks: update_splunk.yml
+      when: splunk_forwarder_state == "present" and splunk_version_mismatch is defined and splunk_version_mismatch == true
+
+    - include_tasks: remove_splunk.yml
+      when: splunk_forwarder_state == "absent"
+
+- name: Use custom_param variable
+  ansible.builtin.debug:
+    msg: "The value of custom_param is {{ custom_param }}"

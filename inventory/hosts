@@ -1,0 +1,9 @@
+[linux_servers]
+linux.example.com
+
+[windows_servers]
+windows.example.com
+
+[all:vars]
+ansible_user=UseR
+ansible_password=your_ansible_password

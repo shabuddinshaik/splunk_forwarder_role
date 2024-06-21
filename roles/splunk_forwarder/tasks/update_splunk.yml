@@ -1,0 +1,61 @@
+---
+- name: Stop Splunk Forwarder service (Linux)
+  ansible.builtin.systemd:
+    name: splunkforwarder
+    state: stopped
+  when: os_family != "Windows"
+
+- name: Stop Splunk Forwarder service (Windows)
+  ansible.windows.win_service:
+    name: SplunkForwarder
+    state: stopped
+  when: os_family == "Windows"
+
+- name: Remove existing Splunk Forwarder package (Linux)
+  ansible.builtin.apt:
+    name: splunkforwarder
+    state: absent
+  when: os_family != "Windows"
+
+- name: Remove existing Splunk Forwarder package (Windows)
+  ansible.windows.win_package:
+    name: SplunkForwarder
+    state: absent
+  when: os_family == "Windows"
+
+- name: Download Splunk Forwarder package (Linux)
+  ansible.builtin.get_url:
+    url: "{{ splunk_package_url }}"
+    dest: /tmp/splunkforwarder-{{ splunk_version }}-linux-2.6-amd64.deb
+  when: os_family != "Windows"
+
+- name: Install Splunk Forwarder (Linux)
+  ansible.builtin.dpkg:
+    name: /tmp/splunkforwarder-{{ splunk_version }}-linux-2.6-amd64.deb
+    state: present
+  when: os_family != "Windows"
+
+- name: Download Splunk Forwarder package (Windows)
+  ansible.windows.win_get_url:
+    url: "{{ splunk_package_windows_url }}"
+    dest: C:\\splunkforwarder-{{ splunk_version }}-x64-release.msi
+  when: os_family == "Windows"
+
+- name: Install Splunk Forwarder (Windows)
+  ansible.windows.win_package:
+    path: C:\\splunkforwarder-{{ splunk_version }}-x64-release.msi
+    state: present
+  when: os_family == "Windows"
+
+- name: Start Splunk Forwarder service (Linux)
+  ansible.builtin.systemd:
+    name: splunkforwarder
+    state: started
+    enabled: yes
+  when: os_family != "Windows"
+
+- name: Start Splunk Forwarder service (Windows)
+  ansible.windows.win_service:
+    name: SplunkForwarder
+    state: started
+  when: os_family == "Windows"

@@ -1,0 +1,6 @@
+---
+- name: Ensure Splunk Forwarder is installed
+  win_package:
+    path: "{{ splunk_forwarder_windows_url }}"
+    state: present
+  when: is_windows

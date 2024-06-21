@@ -1,0 +1,17 @@
+---
+- hosts: linux_servers
+  become: yes
+  roles:
+    - role: splunk_forwarder
+      splunk_forwarder_state: present
+      splunk_version: "{{ default }}"
+      custom_param: "{{ restapi_value | default('default_value_from_restapi') }}"
+
+- hosts: windows_servers
+  roles:
+    - role: splunk_forwarder
+      splunk_forwarder_state: present
+      splunk_version: "{{ default }}"
+      ansible_user: "{{ ansible_user }}"
+      ansible_password: "{{ ansible_password }}"
+      custom_param: "{{ restapi_value | default('default_value_from_restapi') }}"

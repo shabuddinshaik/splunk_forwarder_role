@@ -1,0 +1,6 @@
+---
+splunk_forwarder_state: present
+splunk_version: "{{ default }}"
+splunk_package_url: "https://download.splunk.com/products/universalforwarder/releases/{{ splunk_version }}/linux/splunkforwarder-{{ splunk_version }}-linux-2.6-x86_64.rpm"
+splunk_package_windows_url: "https://download.splunk.com/products/universalforwarder/releases/{{ splunk_version }}/windows/splunkforwarder-{{ splunk_version }}-x64-release.msi"
+custom_param: default_value
