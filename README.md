@@ -22,6 +22,8 @@ custom_param: default_value
 
 
 ## **Folder Structure**
+
+
 ├── playbook.yml
 ├── roles
 │   └── splunk_forwarder
