@@ -21,7 +21,7 @@ splunk_package_windows_url: "https://download.splunk.com/products/universalforwa
 custom_param: default_value
 
 
-## Folder Structure
+## **Folder Structure**
 ├── playbook.yml
 ├── roles
 │   └── splunk_forwarder
