@@ -20,9 +20,7 @@ splunk_package_url: "https://download.splunk.com/products/universalforwarder/rel
 splunk_package_windows_url: "https://download.splunk.com/products/universalforwarder/releases/{{ splunk_version }}/windows/splunkforwarder-{{ splunk_version }}-x64-release.msi"
 custom_param: default_value
 
-
-# Folder Structure
-
+Folder Structure
 
 ├── playbook.yml
 ├── roles
